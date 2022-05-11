@@ -150,7 +150,7 @@ const Header = ({ selectedIndex, setSelectedIndex, value, setValue }) => {
       },
       {
         name: 'iOS/Android App Development',
-        link: '/mobileapp',
+        link: '/mobileapps',
         activeIndex: 1,
         selectedIndex: 2,
       },
@@ -231,6 +231,10 @@ const Header = ({ selectedIndex, setSelectedIndex, value, setValue }) => {
             }
           }
           break;
+        case '/estimate':
+          setValue(0);
+          setSelectedIndex();
+          break;
         default:
           break;
       }
@@ -264,6 +268,10 @@ const Header = ({ selectedIndex, setSelectedIndex, value, setValue }) => {
         className={classes.button}
         component={Link}
         to="/estimate"
+        onClick={() => {
+          setOpenDrawer(false);
+          setValue(0);
+        }}
       >
         Free Estimate
       </Button>
@@ -344,7 +352,7 @@ const Header = ({ selectedIndex, setSelectedIndex, value, setValue }) => {
             }}
             onClick={() => {
               setOpenDrawer(false);
-              setValue(5);
+              setValue(0);
             }}
           >
             <ListItemText className={classes.drawerItem} disableTypography>

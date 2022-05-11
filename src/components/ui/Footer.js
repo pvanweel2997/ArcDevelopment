@@ -114,7 +114,7 @@ const Footer = ({ selectedIndex, setSelectedIndex, value, setValue }) => {
               item
               className={classes.link}
               component={Link}
-              to="/mobileapp"
+              to="/mobileapps"
               onClick={() => {
                 setValue(1);
                 setSelectedIndex(2);
