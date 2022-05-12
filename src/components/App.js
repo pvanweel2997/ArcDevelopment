@@ -39,13 +39,31 @@ function App() {
               />
             }
           />
-          <Route exact path="/customsoftware" element={<CustomSoftware />} />
+          <Route
+            exact
+            path="/customsoftware"
+            element={
+              <CustomSoftware
+                setValue={setValue}
+                setSelectedIndex={setSelectedIndex}
+              />
+            }
+          />
           <Route exact path="/mobileapps" element={<MobileApps />} />
           <Route exact path="/websites" element={<Websites />} />
           <Route exact path="/revolution" element={<Revolution />} />
           <Route exact path="/about" element={<About />} />
           <Route exact path="/contact" element={<Contact />} />
-          <Route exact path="/services" element={<Services />} />
+          <Route
+            exact
+            path="/services"
+            element={
+              <Services
+                setValue={setValue}
+                setSelectedIndex={setSelectedIndex}
+              />
+            }
+          />
           <Route exact path="/estimate" element={<Estimate />} />
         </Routes>
         <Footer
