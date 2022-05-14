@@ -138,7 +138,7 @@ const LandingPage = ({ setValue, setSelectedIndex }) => {
     autoplay: true,
     animationData,
     renderSettings: {
-      preserveAspectRation: 'xMidYMid slice',
+      preserveAspectRatio: 'xMidYMid slice',
     },
   };
   return (
