@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Lottie from 'react-lottie';
-import { makeStyles, useTheme } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/styles';
 import { Grid, Typography, IconButton, useMediaQuery } from '@material-ui/core';
 import backArrow from '../../assets/backArrow.svg';
 import forwardArrow from '../../assets/forwardArrow.svg';
