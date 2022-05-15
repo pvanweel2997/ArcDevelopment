@@ -49,11 +49,53 @@ function App() {
               />
             }
           />
-          <Route exact path="/mobileapps" element={<MobileApps />} />
-          <Route exact path="/websites" element={<Websites />} />
-          <Route exact path="/revolution" element={<Revolution />} />
-          <Route exact path="/about" element={<About />} />
-          <Route exact path="/contact" element={<Contact />} />
+          <Route
+            exact
+            path="/mobileapps"
+            element={
+              <MobileApps
+                setValue={setValue}
+                setSelectedIndex={setSelectedIndex}
+              />
+            }
+          />
+          <Route
+            exact
+            path="/websites"
+            element={
+              <Websites
+                setValue={setValue}
+                setSelectedIndex={setSelectedIndex}
+              />
+            }
+          />
+          <Route
+            exact
+            path="/revolution"
+            element={
+              <Revolution
+                setValue={setValue}
+                setSelectedIndex={setSelectedIndex}
+              />
+            }
+          />
+          <Route
+            exact
+            path="/about"
+            element={
+              <About setValue={setValue} setSelectedIndex={setSelectedIndex} />
+            }
+          />
+          <Route
+            exact
+            path="/contact"
+            element={
+              <Contact
+                setValue={setValue}
+                setSelectedIndex={setSelectedIndex}
+              />
+            }
+          />
           <Route
             exact
             path="/services"
