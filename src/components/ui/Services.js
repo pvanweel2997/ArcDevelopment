@@ -55,7 +55,7 @@ const Services = ({ setValue, setSelectedIndex }) => {
       >
         <Typography
           align={matchesSM ? 'center' : undefined}
-          gutterbottom="true"
+          gutterbottom
           variant="h2"
         >
           Services

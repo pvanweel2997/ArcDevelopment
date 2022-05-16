@@ -44,8 +44,8 @@ const CustomSoftware = ({ setValue, setSelectedIndex }) => {
 
   const documentsOptions = {
     loop: true,
-    autoplay: false,
-    documentsAnimation,
+    autoplay: true,
+    animationData: documentsAnimation,
     renderSettings: {
       preserveAspectRatio: 'xMidYMid slice',
     },
@@ -53,8 +53,8 @@ const CustomSoftware = ({ setValue, setSelectedIndex }) => {
 
   const scaleOptions = {
     loop: true,
-    autoplay: false,
-    scaleAnimation,
+    autoplay: true,
+    animationData: scaleAnimation,
     renderSettings: {
       preserveAspectRatio: 'xMidYMid slice',
     },
@@ -62,8 +62,8 @@ const CustomSoftware = ({ setValue, setSelectedIndex }) => {
 
   const automationsOptions = {
     loop: true,
-    autoplay: false,
-    automationAnimation,
+    autoplay: true,
+    animationData: automationAnimation,
     renderSettings: {
       preserveAspectRatio: 'xMidYMid slice',
     },
@@ -71,8 +71,8 @@ const CustomSoftware = ({ setValue, setSelectedIndex }) => {
 
   const uxOptions = {
     loop: true,
-    autoplay: false,
-    uxAnimation,
+    autoplay: true,
+    animationData: uxAnimation,
     renderSettings: {
       preserveAspectRatio: 'xMidYMid slice',
     },
@@ -411,7 +411,6 @@ const CustomSoftware = ({ setValue, setSelectedIndex }) => {
           <Grid item md>
             <Lottie
               options={automationsOptions}
-              isStopped={true}
               style={{ maxHeight: 290, maxWidth: 280 }}
             />
           </Grid>

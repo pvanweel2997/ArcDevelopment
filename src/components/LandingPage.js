@@ -2,7 +2,7 @@ import React from 'react';
 import Lottie from 'react-lottie';
 import { Link } from 'react-router-dom';
 
-import animationData from '../animations/landinganimation/data.js';
+import landingAnimation from '../animations/landinganimation/data.js';
 import ButtonArrow from '../components/ui/ButtonArrow';
 import customSoftwareIcon from '../assets/Custom Software Icon.svg';
 import mobileAppsIcon from '../assets/mobileIcon.svg';
@@ -136,7 +136,7 @@ const LandingPage = ({ setValue, setSelectedIndex }) => {
   const defaultOptions = {
     loop: true,
     autoplay: true,
-    animationData,
+    animationData: landingAnimation,
     renderSettings: {
       preserveAspectRatio: 'xMidYMid slice',
     },

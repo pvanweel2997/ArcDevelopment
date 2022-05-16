@@ -38,7 +38,7 @@ const MobileApps = ({ setValue, setSelectedIndex }) => {
   const defaultOptions = {
     loop: true,
     autoplay: true,
-    integrationAnimation,
+    animationData: integrationAnimation,
     renderSettings: {
       preserveAspectRatio: 'xMidYMid slice',
     },
