@@ -1,6 +1,5 @@
 import React from 'react';
 import Lottie from 'react-lottie';
-import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
 import { Grid, Typography, useMediaQuery } from '@material-ui/core';
 import design from '../../assets/designIcon.svg';
@@ -40,7 +39,6 @@ const Revolution = ({ setValue, setSelectedIndex }) => {
 
   const matchesMD = useMediaQuery(theme => theme.breakpoints.down('md'));
   const matchesSM = useMediaQuery(theme => theme.breakpoints.down('sm'));
-  const matchesXS = useMediaQuery(theme => theme.breakpoints.down('xs'));
   return (
     <Grid container direction="column">
       <Grid item className={classes.rowContainer} style={{ marginTop: '2em' }}>
