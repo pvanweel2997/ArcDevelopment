@@ -1,7 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
-import { Grid, Typography, useMediaQuery, Avatar } from '@material-ui/core';
+import {
+  Grid,
+  Typography,
+  useMediaQuery,
+  Avatar,
+  Hidden,
+} from '@material-ui/core';
 import history from '../../assets/history.svg';
 import profile from '../../assets/founder.jpg';
 import yearbook from '../../assets/yearbook.svg';
@@ -27,25 +32,36 @@ const useStyles = makeStyles(theme => ({
   avatar: {
     height: '25em',
     width: '25em',
+    [theme.breakpoints.down('sm')]: {
+      height: '20em',
+      width: '20em',
+      maxHeight: 300,
+      maxWidth: 300,
+    },
   },
 }));
 
 const About = ({ setValue, setSelectedIndex }) => {
   const classes = useStyles();
-
   const matchesMD = useMediaQuery(theme => theme.breakpoints.down('md'));
-  const matchesSM = useMediaQuery(theme => theme.breakpoints.down('sm'));
 
   return (
     <Grid container direction="column">
-      <Grid item className={classes.rowContainer} style={{ marginTop: '2em' }}>
-        <Typography variant="h2">About Us</Typography>
+      <Grid
+        item
+        className={classes.rowContainer}
+        style={{ marginTop: matchesMD ? '1em' : '2em' }}
+      >
+        <Typography variant="h2" align={matchesMD ? 'center' : undefined}>
+          About Us
+        </Typography>
       </Grid>
       <Grid
         item
         container
         justifyContent="center"
         className={classes.rowContainer}
+        style={{ marginTop: '3em' }}
       >
         <Typography
           variant="h4"
@@ -63,6 +79,7 @@ const About = ({ setValue, setSelectedIndex }) => {
         item
         container
         className={classes.rowContainer}
+        style={{ marginTop: '10em', marginBottom: '10em' }}
         direction={matchesMD ? 'column' : 'row'}
         alignItems={matchesMD ? 'center' : undefined}
         justifyContent="space-around"
@@ -140,7 +157,7 @@ const About = ({ setValue, setSelectedIndex }) => {
             <img
               src={history}
               alt="quill pen sitting on top of book"
-              style={{ maxHeight: '22em' }}
+              style={{ maxHeight: matchesMD ? 200 : '22em' }}
             />
           </Grid>
         </Grid>
@@ -151,6 +168,7 @@ const About = ({ setValue, setSelectedIndex }) => {
         direction="column"
         alignItems="center"
         className={classes.rowContainer}
+        style={{ marginBottom: '15em' }}
       >
         <Grid item>
           <Typography align="center" variant="h4" gutterBottom>
@@ -168,23 +186,7 @@ const About = ({ setValue, setSelectedIndex }) => {
         <Grid item>
           <Avatar src={profile} alt="founder" className={classes.avatar} />
         </Grid>
-        <Grid item container justifyContent={matchesMD ? 'center' : undefined}>
-          <Grid
-            item
-            container
-            direction="column"
-            lg
-            alignItems={matchesMD ? 'center' : undefined}
-          >
-            <Grid item>
-              <img src={yearbook} alt="yearbook page about founder" />
-            </Grid>
-            <Grid item>
-              <Typography variant="caption">
-                a page from my Sophmore yearbook
-              </Typography>
-            </Grid>
-          </Grid>
+        <Hidden lgUp>
           <Grid item lg style={{ maxWidth: '45em', padding: '1.25em' }}>
             <Typography variant="body1" paragraph align="center">
               I taught myself basic coding from a library book in third grade,
@@ -197,6 +199,43 @@ const About = ({ setValue, setSelectedIndex }) => {
               with the intuition I have developed
             </Typography>
           </Grid>
+        </Hidden>
+        <Grid item container justifyContent={matchesMD ? 'center' : undefined}>
+          <Grid
+            item
+            container
+            direction="column"
+            lg
+            alignItems={matchesMD ? 'center' : undefined}
+            style={{ marginBottom: matchesMD ? '2.5em' : 0 }}
+          >
+            <Grid item>
+              <img
+                src={yearbook}
+                alt="yearbook page about founder"
+                style={{ maxWidth: matchesMD ? 300 : undefined }}
+              />
+            </Grid>
+            <Grid item>
+              <Typography variant="caption">
+                a page from my Sophmore yearbook
+              </Typography>
+            </Grid>
+          </Grid>
+          <Hidden mdDown>
+            <Grid item lg style={{ maxWidth: '45em', padding: '1.25em' }}>
+              <Typography variant="body1" paragraph align="center">
+                I taught myself basic coding from a library book in third grade,
+                and ever since then my passion has solely been set on learning —
+                learning about computers, learning mathematics and philosophy,
+                studying design, always just learning.
+              </Typography>
+              <Typography variant="body1" paragraph align="center">
+                Now I’m ready to apply everything I’ve learned, and to help
+                others with the intuition I have developed
+              </Typography>
+            </Grid>
+          </Hidden>
           <Grid
             item
             container
@@ -205,7 +244,11 @@ const About = ({ setValue, setSelectedIndex }) => {
             alignItems={matchesMD ? 'center' : 'flex-end'}
           >
             <Grid item>
-              <img src={puppy} alt="grey spotted puppy" />
+              <img
+                src={puppy}
+                alt="grey spotted puppy"
+                style={{ maxWidth: matchesMD ? 300 : undefined }}
+              />
             </Grid>
             <Grid item>
               <Typography variant="caption">
@@ -214,6 +257,10 @@ const About = ({ setValue, setSelectedIndex }) => {
             </Grid>
           </Grid>
         </Grid>
+      </Grid>
+      <Grid item>
+        {/*---- Call To Action Block ----- */}
+        <CallToAction setValue={setValue} />
       </Grid>
     </Grid>
   );
