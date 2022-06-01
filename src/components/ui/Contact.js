@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+
+// import axios from '../axios-configure';
 import { Link } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/styles';
 import {
@@ -124,6 +127,15 @@ const Contact = ({ setValue, setSelectedIndex }) => {
       default:
         break;
     }
+  };
+
+  const onConfirm = () => {
+    axios
+      .get('http://www.localhost:3001/sendMail', {})
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log('the error: ' + err));
   };
 
   return (
@@ -270,7 +282,7 @@ const Contact = ({ setValue, setSelectedIndex }) => {
                 variant="contained"
                 className={classes.sendButton}
                 onClick={() => {
-                  console.log('onclick');
+                  console.log('onclick1');
                   setOpen(true);
                 }}
                 // disabled={
@@ -361,7 +373,7 @@ const Contact = ({ setValue, setSelectedIndex }) => {
               />
             </Grid>
 
-            <Grid item style={{ maxWidth: matchesXS ? '100%' : '20em' }}>
+            <Grid item style={{ maxWidth: matchesXS ? '100% ' : '20em' }}>
               <TextField
                 fullWidth
                 id="message"
@@ -396,18 +408,15 @@ const Contact = ({ setValue, setSelectedIndex }) => {
               <Button
                 variant="contained"
                 className={classes.sendButton}
-                onClick={() => {
-                  console.log('onclick');
-                  setOpen(true);
-                }}
-                disabled={
-                  name.length === 0 ||
-                  message.length === 0 ||
-                  phone.length === 0 ||
-                  email.length === 0 ||
-                  phoneHelper.length !== 0 ||
-                  emailHelper.length !== 0
-                }
+                onClick={onConfirm}
+                // disabled={
+                //   name.length === 0 ||
+                //   message.length === 0 ||
+                //   phone.length === 0 ||
+                //   email.length === 0 ||
+                //   phoneHelper.length !== 0 ||
+                //   emailHelper.length !== 0
+                // }
               >
                 Send Message
                 <img
