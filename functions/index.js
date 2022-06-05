@@ -1,16 +1,15 @@
-const functions = require("firebase-functions");
+const functions = require('firebase-functions');
 const config = functions.config();
-const nodemailer = require("nodemailer");
-const cors = require("cors")({origin: true});
-const {initializeApp, applicationDefault} = require("firebase-admin/app");
+const nodemailer = require('nodemailer');
+const cors = require('cors')({ origin: true });
+const { initializeApp, applicationDefault } = require('firebase-admin/app');
 
 initializeApp({
   credential: applicationDefault(),
 });
 
-
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  service: 'gmail',
   auth: {
     user: config.user.email,
     pass: config.user.password,
@@ -18,10 +17,10 @@ const transporter = nodemailer.createTransport({
 });
 
 const mailOptions = {
-  from: "pvmuicourse",
-  to: "pvanweel@msn.com",
-  subject: "Hello from guidehound20 using nodemailer",
-  text: "Test successful",
+  from: process.env.MAIL_FROM,
+  to: process.env.MAIL_TO,
+  subject: 'Hello  using nodemailer',
+  text: 'Test successful',
 };
 
 // Create and Deploy Your First Cloud Functions
@@ -29,13 +28,13 @@ const mailOptions = {
 
 exports.sendMail = functions.https.onRequest((req, res) => {
   cors(req, res, () => {
-    res.set("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    transporter.sendMail(mailOptions, (error) => {
+    res.set('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    transporter.sendMail(mailOptions, error => {
       if (error) {
         res.send(error);
       } else {
-        res.send("Message sent successfully.");
+        res.send('Message sent successfully.');
       }
     });
   });
