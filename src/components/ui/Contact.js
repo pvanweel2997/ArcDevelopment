@@ -302,6 +302,7 @@ const Contact = ({ setValue, setSelectedIndex }) => {
                 fullWidth
                 id="message"
                 className={classes.message}
+                placeholder="Tell us more about your project"
                 InputProps={{ disableUnderline: true }}
                 multiline
                 rows={10}
