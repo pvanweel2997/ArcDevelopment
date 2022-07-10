@@ -636,6 +636,7 @@ const Estimate = () => {
       });
   };
 
+  /* method used to disable the estimate button */
   const estimateDisabled = () => {
     let disabled = true;
 
