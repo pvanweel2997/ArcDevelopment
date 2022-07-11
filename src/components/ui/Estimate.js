@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Lottie from 'react-lottie';
 import axios from 'axios';
 import { cloneDeep } from 'lodash';
@@ -339,6 +339,8 @@ const Estimate = () => {
   const matchesMD = useMediaQuery(theme => theme.breakpoints.down('md'));
   const matchesSM = useMediaQuery(theme => theme.breakpoints.down('sm'));
 
+  const myRef = useRef(null);
+
   const [questions, setQuestions] = useState(defaultQuestions);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [name, setName] = useState('');
@@ -371,6 +373,10 @@ const Estimate = () => {
   };
 
   const nextQuestion = () => {
+    if (matchesSM) {
+      window.scrollTo(0, myRef.current.offsetTop + 75);
+    }
+
     const newQuestions = cloneDeep(questions);
     const currentlyActive = newQuestions.filter(question => question.active);
     const activeIndex = currentlyActive[0].id - 1;
@@ -382,6 +388,9 @@ const Estimate = () => {
   };
 
   const previousQuestion = () => {
+    if (matchesSM) {
+      window.scrollTo(0, myRef.current.offsetTop + 75);
+    }
     const newQuestions = cloneDeep(questions);
     const currentlyActive = newQuestions.filter(question => question.active);
     const activeIndex = currentlyActive[0].id - 1;
@@ -444,16 +453,25 @@ const Estimate = () => {
 
     switch (newSelected.title) {
       case 'Custom Software Development':
+        if (matchesSM) {
+          window.scrollTo(0, myRef.current.offsetTop + 75);
+        }
         setQuestions(softwareQuestions);
         setService(newSelected.title);
         clearOutSelections();
         break;
       case 'iOS/Android App Development':
+        if (matchesSM) {
+          window.scrollTo(0, myRef.current.offsetTop + 75);
+        }
         setQuestions(softwareQuestions);
         setService(newSelected.title);
         clearOutSelections();
         break;
       case 'Website Development':
+        if (matchesSM) {
+          window.scrollTo(0, myRef.current.offsetTop + 75);
+        }
         setQuestions(websiteQuestions);
         setService(newSelected.title);
         break;
@@ -803,7 +821,7 @@ const Estimate = () => {
           .filter(question => question.active)
           .map((question, index) => (
             <React.Fragment key={index}>
-              <Grid item>
+              <Grid item ref={myRef}>
                 <Typography
                   variant="h2"
                   align="center"
