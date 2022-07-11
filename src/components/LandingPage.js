@@ -95,6 +95,9 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down('sm')]: {
       padding: 25,
     },
+    [theme.breakpoints.down('xs')]: {
+      padding: 5,
+    },
   },
   revolutionBackground: {
     backgroundImage: `url(${revolutionBackground})`,
@@ -320,7 +323,8 @@ const LandingPage = ({ setValue, setSelectedIndex }) => {
               Reach More. Discover More. Sell More.
             </Typography>
             <Typography variant="subtitle1">
-              Optomized for Search Engines, built for speed.
+              Optimized for Search Engines, {matchesXS && <br />}built for
+              speed.
             </Typography>
             <Button
               component={Link}
