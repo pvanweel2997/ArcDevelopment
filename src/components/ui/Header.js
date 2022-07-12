@@ -7,7 +7,6 @@ import {
   Tabs,
   Tab,
   Button,
-  Menu,
   MenuItem,
   useMediaQuery,
   SwipeableDrawer,
@@ -15,6 +14,11 @@ import {
   List,
   ListItem,
   ListItemText,
+  Grow,
+  Paper,
+  Popper,
+  MenuList,
+  ClickAwayListener,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -81,6 +85,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.common.blue,
     color: 'white',
     borderRadius: '0px',
+    zIndex: 1302,
   },
   menuItem: {
     ...theme.typography.tab,
@@ -138,28 +143,22 @@ const Header = ({ selectedIndex, setSelectedIndex, value, setValue }) => {
   const menuOptions = useMemo(
     () => [
       {
-        name: 'Services',
-        link: '/services',
-        activeIndex: 1,
-        selectedIndex: 0,
-      },
-      {
         name: 'Custom Software',
         link: '/customsoftware',
         activeIndex: 1,
-        selectedIndex: 1,
+        selectedIndex: 0,
       },
       {
         name: 'iOS/Android App Development',
         link: '/mobileapps',
         activeIndex: 1,
-        selectedIndex: 2,
+        selectedIndex: 1,
       },
       {
         name: 'Website Development',
         link: '/websites',
         activeIndex: 1,
-        selectedIndex: 3,
+        selectedIndex: 2,
       },
     ],
     []
@@ -260,6 +259,7 @@ const Header = ({ selectedIndex, setSelectedIndex, value, setValue }) => {
             aria-owns={route.ariaOwns}
             aria-haspopup={route.ariaPopup}
             onMouseOver={route.mouseOver}
+            onMouseLeave={e => setOpenMenu(false)}
           />
         ))}
       </Tabs>
@@ -276,32 +276,55 @@ const Header = ({ selectedIndex, setSelectedIndex, value, setValue }) => {
       >
         Free Estimate
       </Button>
-      <Menu
-        id="simple-menu"
-        anchorEl={anchorEl}
+
+      <Popper
         open={openMenu}
-        onClose={handleClose}
-        MenuListProps={{ onMouseLeave: handleClose }}
-        classes={{ paper: classes.menu }}
-        elevation={0}
-        keepMounted
-        style={{ zIndex: 1302 }}
+        anchorEl={anchorEl}
+        transition
+        disablePortal
+        placement="bottom-start"
       >
-        {menuOptions.map((option, index) => (
-          <MenuItem
-            key={index}
-            component={Link}
-            to={option.link}
-            className={classes.menuItem}
-            onClick={e => {
-              handleMenuItemClick(e, index);
+        {({ TransitionProps, placement }) => (
+          <Grow
+            {...TransitionProps}
+            id="menu-list-grow"
+            style={{
+              transformOrigin: placement === 'top left',
             }}
-            selected={index === selectedIndex && value === 1}
           >
-            {option.name}
-          </MenuItem>
-        ))}
-      </Menu>
+            <Paper classes={{ root: classes.menu }} elevation={0}>
+              <ClickAwayListener onClickAway={handleClose}>
+                <MenuList
+                  id="simple-menu"
+                  onMouseLeave={handleClose}
+                  disablePadding
+                  autoFocusItem={false}
+                  onMouseOver={e => setOpenMenu(true)}
+                >
+                  {menuOptions.map((option, index) => (
+                    <MenuItem
+                      key={index}
+                      component={Link}
+                      to={option.link}
+                      className={classes.menuItem}
+                      onClick={e => {
+                        handleMenuItemClick(e, index);
+                      }}
+                      selected={
+                        index === selectedIndex &&
+                        value === 1 &&
+                        window.location.pathname !== 'services'
+                      }
+                    >
+                      {option.name}
+                    </MenuItem>
+                  ))}
+                </MenuList>
+              </ClickAwayListener>
+            </Paper>
+          </Grow>
+        )}
+      </Popper>
     </>
   );
 
