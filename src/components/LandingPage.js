@@ -21,6 +21,11 @@ import {
   CardContent,
 } from '@material-ui/core';
 
+import {
+  LazyLoadImage,
+  LazyLoadComponent,
+} from 'react-lazy-load-image-component';
+
 const useStyles = makeStyles(theme => ({
   animation: {
     maxWidth: '50em',
@@ -122,6 +127,8 @@ const useStyles = makeStyles(theme => ({
     },
   },
   infoBackground: {
+    position: 'absolute',
+    zIndex: -1,
     backgroundImage: `url(${infoBackground})`,
     backgroundPosition: 'center',
     backgroundSize: 'cover',
@@ -245,7 +252,7 @@ const LandingPage = ({ setValue, setSelectedIndex }) => {
             </Button>
           </Grid>
           <Grid item>
-            <img
+            <LazyLoadImage
               className={classes.icon}
               alt="custom software icon"
               src={customSoftwareIcon}
@@ -295,7 +302,7 @@ const LandingPage = ({ setValue, setSelectedIndex }) => {
             </Button>
           </Grid>
           <Grid item style={{ marginRight: matchesSM ? 0 : '5em' }}>
-            <img
+            <LazyLoadImage
               className={classes.icon}
               alt="mobile phone icon"
               src={mobileAppsIcon}
@@ -345,7 +352,7 @@ const LandingPage = ({ setValue, setSelectedIndex }) => {
             </Button>
           </Grid>
           <Grid item>
-            <img
+            <LazyLoadImage
               className={classes.icon}
               alt="website icon"
               src={websitesIcon}
@@ -398,14 +405,16 @@ const LandingPage = ({ setValue, setSelectedIndex }) => {
               </Grid>
             </CardContent>
           </Card>
-          <div className={classes.revolutionBackground} />
+          <LazyLoadComponent threshold={850}>
+            <div className={classes.revolutionBackground} />
+          </LazyLoadComponent>
         </Grid>
       </Grid>
       <Grid item>
         {/*---- Information Block ----- */}
         <Grid
           container
-          style={{ height: '80em' }}
+          style={{ height: '60em' }}
           direction="row"
           alignItems="center"
         >
@@ -416,7 +425,6 @@ const LandingPage = ({ setValue, setSelectedIndex }) => {
             style={{
               textAlign: matchesXS ? 'center' : 'inherit',
             }}
-            className={classes.infoBackground}
           >
             <Grid
               item
@@ -488,12 +496,17 @@ const LandingPage = ({ setValue, setSelectedIndex }) => {
               </Grid>
             </Grid>
           </Grid>
+          <LazyLoadComponent threshold={800}>
+            <div className={classes.infoBackground} />
+          </LazyLoadComponent>
         </Grid>
       </Grid>
 
       <Grid item>
-        {/*---- Call To Action Block ----- */}
-        <CallToAction setValue={setValue} />
+        <LazyLoadComponent threshold={800}>
+          {/*---- Call To Action Block ----- */}
+          <CallToAction setValue={setValue} />
+        </LazyLoadComponent>
       </Grid>
     </Grid>
   );

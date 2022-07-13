@@ -15,8 +15,11 @@ import Revolution from './ui/Revolution';
 import About from './ui/About';
 import Contact from './ui/Contact';
 import Services from './ui/Services';
+import Fonts from './ui/Fonts';
+import { LazyLoadComponent } from 'react-lazy-load-image-component';
 
 function App() {
+  Fonts();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [value, setValue] = useState(0);
   return (
@@ -108,12 +111,14 @@ function App() {
           />
           <Route exact path="/estimate" element={<Estimate />} />
         </Routes>
-        <Footer
-          selectedIndex={selectedIndex}
-          setSelectedIndex={setSelectedIndex}
-          value={value}
-          setValue={setValue}
-        />
+        <LazyLoadComponent threshold={400}>
+          <Footer
+            selectedIndex={selectedIndex}
+            setSelectedIndex={setSelectedIndex}
+            value={value}
+            setValue={setValue}
+          />
+        </LazyLoadComponent>
       </BrowserRouter>
     </ThemeProvider>
   );

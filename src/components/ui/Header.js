@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { makeStyles, useTheme } from '@material-ui/styles';
 import {
   AppBar,
@@ -27,6 +27,7 @@ import {
 import { Link } from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ReactGA from 'react-ga';
 
 import logo from '../../assets/logo.svg';
 
@@ -205,7 +206,9 @@ const Header = ({ selectedIndex, setSelectedIndex, value, setValue }) => {
         activeIndex: 1,
         ariaOwns: anchorEl ? 'simple-menu' : undefined,
         ariaPopup: anchorEl ? true : undefined,
-        mouseOver: e => handleClick(e),
+        mouseOver: e => {
+          handleClick(e);
+        },
       },
       {
         name: 'The Revolution',
@@ -248,26 +251,26 @@ const Header = ({ selectedIndex, setSelectedIndex, value, setValue }) => {
     setOpenMenu(false);
   };
 
+  const path = typeof window !== 'undefined' ? window.location.pathname : null;
+
+  const activeIndex = useCallback(() => {
+    const found = routes.find(route => route.link === path);
+    const menuFound = menuOptions.find(menu => menu.link === path);
+
+    if (menuFound) {
+      setValue(1);
+      setSelectedIndex(menuFound.selectedIndex);
+    } else if (found === undefined) {
+      setValue(false);
+    } else {
+      setValue(found.activeIndex);
+    }
+  }, [menuOptions, path, routes, setSelectedIndex, setValue]);
+
   useEffect(() => {
-    [...menuOptions, ...routes].forEach(route => {
-      switch (window.location.pathname) {
-        case `${route.link}`:
-          if (value !== route.activeIndex) {
-            setValue(route.activeIndex);
-            if (route.selectedIndex && route.selectedIndex !== selectedIndex) {
-              setSelectedIndex(route.selectedIndex);
-            }
-          }
-          break;
-        case '/estimate':
-          setValue(0);
-          setSelectedIndex();
-          break;
-        default:
-          break;
-      }
-    });
-  }, [value, selectedIndex, menuOptions, routes, setSelectedIndex, setValue]);
+    ReactGA.pageview(window.location.pathname + window.location.search);
+    activeIndex();
+  }, [path, activeIndex]);
 
   const tabs = (
     <>
@@ -287,6 +290,10 @@ const Header = ({ selectedIndex, setSelectedIndex, value, setValue }) => {
             aria-owns={route.ariaOwns}
             aria-haspopup={route.ariaPopup}
             onMouseOver={route.mouseOver}
+            onClick={e => {
+              handleClick(e);
+              setOpenMenu(!openMenu);
+            }}
             onMouseLeave={e => setOpenMenu(false)}
           />
         ))}

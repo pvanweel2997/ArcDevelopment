@@ -13,6 +13,7 @@ import maintain from '../../assets/maintainIcon.svg';
 import iterate from '../../assets/iterateIcon.svg';
 import CallToAction from './CallToAction';
 import technologyAnimation from '../../animations/technologyAnimation/data.json';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const useStyles = makeStyles(theme => ({
   rowContainer: {
@@ -175,7 +176,8 @@ const Revolution = ({ setValue, setSelectedIndex }) => {
         style={{ marginTop: '5em' }}
       >
         <Grid item lg>
-          <img
+          <LazyLoadImage
+            threshold={400}
             src={vision}
             alt="mountain through binoculars"
             style={{
@@ -361,8 +363,9 @@ const Revolution = ({ setValue, setSelectedIndex }) => {
           </Typography>
         </Grid>
       </Grid>
-      {sections.map(section => (
+      {sections.map((section, index) => (
         <Grid
+          key={index}
           item
           container
           direction={matchesMD ? 'column' : 'row'}
@@ -387,8 +390,9 @@ const Revolution = ({ setValue, setSelectedIndex }) => {
               </Typography>
             </Grid>
             <Grid item>
-              {section.paragraphs.map(text => (
+              {section.paragraphs.map((text, index) => (
                 <Typography
+                  key={index}
                   variant="body1"
                   align={matchesSM ? 'center' : undefined}
                   style={{ color: '#fff', maxWidth: '20em' }}
@@ -400,7 +404,8 @@ const Revolution = ({ setValue, setSelectedIndex }) => {
             </Grid>
           </Grid>
           <Grid item lg style={{ alignSelf: 'center' }}>
-            <img
+            <LazyLoadImage
+              threshold={400}
               src={section.icon}
               alt={section.iconAlt}
               width="100%"
