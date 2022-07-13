@@ -290,10 +290,6 @@ const Header = ({ selectedIndex, setSelectedIndex, value, setValue }) => {
             aria-owns={route.ariaOwns}
             aria-haspopup={route.ariaPopup}
             onMouseOver={route.mouseOver}
-            onClick={e => {
-              handleClick(e);
-              setOpenMenu(!openMenu);
-            }}
             onMouseLeave={e => setOpenMenu(false)}
           />
         ))}
